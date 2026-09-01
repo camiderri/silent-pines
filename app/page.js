@@ -1,0 +1,457 @@
+"use client";
+
+import { useState } from "react";
+import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default function Home() {
+  const instagramUrl = "#";
+  const [menuOpen, setMenuOpen] = useState(false);
+  return (
+    <main className="min-h-screen bg-stone-100 text-stone-800">
+    {/* Мобильное меню */}
+    {menuOpen && (
+      <div className="fixed inset-0 z-50 flex flex-col bg-[#17201E] px-8 py-6 text-stone-200 md:hidden">
+        <div className="flex justify-end">
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="text-2xl text-stone-300"
+            aria-label="Close menu"
+          >
+            ×
+          </button>
+        </div>
+        <nav className="mt-12 flex flex-col gap-6 text-sm tracking-widest">
+          <a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-stone-100">ABOUT</a>
+          <a href="#places" onClick={() => setMenuOpen(false)} className="hover:text-stone-100">PLACES</a>
+          <a href="#guide" onClick={() => setMenuOpen(false)} className="hover:text-stone-100">VISITOR GUIDE</a>
+          <a href="#map" onClick={() => setMenuOpen(false)} className="hover:text-stone-100">MAP</a>
+          <a href="#stay" onClick={() => setMenuOpen(false)} className="hover:text-stone-100">PLAN YOUR STAY</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-stone-100">CONTACT</a>
+        </nav>
+      </div>
+    )}
+
+      {/* ===== HEADER ===== */}
+      <header className="flex items-center justify-between px-8 py-5">
+        <div className="text-sm font-semibold tracking-widest">
+          SILENT PINES
+          <span className="block text-xs font-normal tracking-wider text-stone-500">
+            TOURISM OFFICE
+          </span>
+        </div>
+        <nav className="hidden gap-6 text-xs tracking-wider text-stone-600 md:flex">
+          <a href="#about" className="hover:text-stone-900">ABOUT</a>
+          <a href="#places" className="hover:text-stone-900">PLACES</a>
+          <a href="#guide" className="hover:text-stone-900">VISITOR GUIDE</a>
+          <a href="#map" className="hover:text-stone-900">MAP</a>
+          <a href="#stay" className="hover:text-stone-900">PLAN YOUR STAY</a>
+          <a href="#contact" className="hover:text-stone-900">CONTACT</a>
+        </nav>         {/* Кнопка-гамбургер — только на мобильном */}
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="text-stone-700 md:hidden"
+          aria-label="Open menu"
+        >
+          <span className="block h-0.5 w-6 bg-stone-700"></span>
+          <span className="mt-1.5 block h-0.5 w-6 bg-stone-700"></span>
+          <span className="mt-1.5 block h-0.5 w-6 bg-stone-700"></span>
+        </button>
+      </header>
+
+      {/* ===== HERO ===== */}
+      <section
+        className="relative flex min-h-[80vh] items-center bg-cover bg-center px-8"
+        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
+
+        <div className="relative z-10 max-w-xl">
+          <h1 className="font-serif text-6xl tracking-widest text-stone-100">
+            SILENT PINES
+          </h1>
+          <p className="mt-8 max-w-sm text-base leading-relaxed text-stone-200">
+            A quiet town surrounded by forest, fog and stories.
+          </p>
+          <button className="mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20">
+            PLAN YOUR VISIT
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+      </section>
+      {/* ===== ABOUT ===== */}
+         <section id="about" className="px-8 pt-24 pb-16">
+               <div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_1.4fr]">
+
+          {/* Левая колонка — текст */}
+          <div>
+            <p className="text-xs tracking-[0.3em] text-stone-400">
+              ABOUT SILENT PINES
+            </p>
+            <h2 className="mt-4 font-serif text-4xl leading-tight text-stone-800">
+              A town that remembers<br />more than it says.
+            </h2>
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-stone-600">
+              <p>
+                The town has no official founding date. Records mention
+                a logging stop, a railway — and then a long pause.
+              </p>
+              <p>
+                Visitors come for the quiet. Most of them leave with
+                the same feeling:
+              </p>
+            </div>
+            <p className="mt-8 font-serif text-xl italic text-stone-500">
+              the town was already waiting.
+            </p>
+          </div>
+
+          {/* Правая колонка — картинка */}
+          <div>
+            <img
+              src="/images/town.jpg"
+              alt="A street in Silent Pines"
+              className="w-full rounded-sm object-cover shadow-sm"
+            />
+          </div>
+
+        </div>
+      </section>       {/* ===== PLACES ===== */}
+      <section id="places" className="px-8 py-24">
+        <div className="mx-auto max-w-6xl">
+
+          <p className="text-center text-xs tracking-[0.3em] text-stone-400">
+            THINGS TO SEE
+          </p>
+
+                   <div className="mt-8 grid gap-8 md:grid-cols-3">
+
+            {/* Карточка 1 — Pine Motel */}
+            <div>
+              <img
+                src="/images/motel.jpg"
+                alt="Pine Motel"
+                               className="aspect-[4/3] w-full object-cover shadow-sm"
+              />
+              <h3 className="mt-4 font-serif text-xl text-stone-800">
+                PINE MOTEL
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-stone-600">
+                Warm rooms. Quiet nights.
+              </p>
+              <p className="mt-1 text-sm italic text-stone-400">
+                Some guests return.
+              </p>
+            </div>
+
+            {/* Карточка 2 — Blackwater Lake */}
+            <div>
+              <img
+                src="/images/lake.jpg"
+                alt="Blackwater Lake"
+                               className="aspect-[4/3] w-full object-cover shadow-sm"
+              />
+              <h3 className="mt-4 font-serif text-xl text-stone-800">
+                BLACKWATER LAKE
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-stone-600">
+                Deep water. Persistent fog.
+              </p>
+              <p className="mt-1 text-sm italic text-stone-400">
+                Do not look too long.
+              </p>
+            </div>
+
+            {/* Карточка 3 — The Clearing */}
+            <div>
+              <img
+                src="/images/clearing.jpg"
+                alt="The Clearing"
+                                className="aspect-[4/3] w-full object-cover shadow-sm"
+              />
+              <h3 className="mt-4 font-serif text-xl text-stone-800">
+                THE CLEARING
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-stone-600">
+                Lost things gather here.
+              </p>
+              <p className="mt-1 text-sm italic text-stone-400">
+                They are rarely collected.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      {/* ===== QUOTE ===== */}
+      <section className="px-8 py-24">
+        <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-[1fr_1.3fr]">
+
+          {/* Левая колонка — картинка */}
+          <div>
+            <img
+              src="/images/quiet.jpg"
+              alt="A cup by a rainy window"
+              className="aspect-[3/4] w-full object-cover shadow-sm"
+            />
+          </div>
+
+          {/* Правая колонка — цитата и показатели */}
+          <div>
+            <h2 className="font-serif text-4xl leading-tight text-stone-800">
+              Take your time.<br />
+              Some places aren’t<br />meant to be rushed.
+            </h2>
+
+            <div className="mt-10 grid grid-cols-2 gap-6 text-stone-600 sm:grid-cols-4">
+              <div>
+                <CloudRain className="h-6 w-6 text-stone-500" strokeWidth={1.5} />
+                <p className="mt-2 text-xs tracking-widest text-stone-500">WEATHER</p>
+                <p className="text-sm text-stone-700">Rain</p>
+              </div>
+              <div>
+                <Thermometer className="h-6 w-6 text-stone-500" strokeWidth={1.5} />
+                <p className="mt-2 text-xs tracking-widest text-stone-500">TEMPERATURE</p>
+                <p className="text-sm text-stone-700">Unchanged</p>
+              </div>
+              <div>
+                <Eye className="h-6 w-6 text-stone-500" strokeWidth={1.5} />
+                <p className="mt-2 text-xs tracking-widest text-stone-500">VISIBILITY</p>
+                <p className="text-sm text-stone-700">Poor</p>
+              </div>
+              <div>
+                <Users className="h-6 w-6 text-stone-500" strokeWidth={1.5} />
+                <p className="mt-2 text-xs tracking-widest text-stone-500">POPULATION</p>
+                <p className="text-sm text-stone-700">Unknown</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      {/* ===== VISITOR GUIDE ===== */}
+            <section id="guide" className="bg-[#17201E] px-8 py-24 text-stone-200">
+        <div className="mx-auto max-w-6xl">
+
+          <p className="text-center text-xs tracking-[0.3em] text-stone-500">
+            VISITOR GUIDE
+          </p>
+
+               <div className="mt-12 grid items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+                 {/* GETTING AROUND */}
+                 <div className="flex flex-col">
+                   <img
+                     src="/images/door.jpg"
+                     alt="Getting around"
+                     className="aspect-[3/4] w-full object-cover"
+                   />
+                   <h3 className="mt-4 text-sm tracking-widest text-stone-100">
+                     GETTING AROUND
+                   </h3>
+                   <p className="mt-2 text-sm leading-relaxed text-stone-200">
+                     Bus service runs once a day.
+                   </p>
+                   <p className="text-sm italic text-stone-400">
+                     The last stop is not marked.
+                   </p>
+                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                     VIEW SCHEDULE &rarr;
+                   </a>
+                 </div>
+
+                 {/* STAY CONNECTED */}
+                 <div className="flex flex-col">
+                   <img
+                     src="/images/phone.jpg"
+                     alt="Stay connected"
+                     className="aspect-[3/4] w-full object-cover"
+                   />
+                   <h3 className="mt-4 text-sm tracking-widest text-stone-100">
+                     STAY CONNECTED
+                   </h3>
+                   <p className="mt-2 text-sm leading-relaxed text-stone-200">
+                     One public phone remains.
+                   </p>
+                   <p className="text-sm italic text-stone-400">
+                     Reception is unreliable.
+                   </p>
+                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                     FIND THE PHONE &rarr;
+                   </a>
+                 </div>
+
+                 {/* SAFETY */}
+                 <div className="flex flex-col">
+                   <img
+                     src="/images/road.jpg"
+                     alt="Safety"
+                     className="aspect-[3/4] w-full object-cover"
+                   />
+                   <h3 className="mt-4 text-sm tracking-widest text-stone-100">
+                     SAFETY
+                   </h3>
+                   <p className="mt-2 text-sm leading-relaxed text-stone-200">
+                     Stay on marked roads.
+                   </p>
+                   <p className="text-sm italic text-stone-400">
+                     Avoid the forest after dark.
+                   </p>
+                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                     READ GUIDELINES &rarr;
+                   </a>
+                 </div>
+
+                 {/* LOCAL SERVICES */}
+                 <div className="flex flex-col">
+                   <img
+                     src="/images/gas.jpg"
+                     alt="Local services"
+                     className="aspect-[3/4] w-full object-cover"
+                   />
+                   <h3 className="mt-4 text-sm tracking-widest text-stone-100">
+                     LOCAL SERVICES
+                   </h3>
+                   <div className="mt-2 space-y-1 text-sm text-stone-200">
+                     <p>Gas station — Closed</p>
+                     <p>General Store — Open</p>
+                     <p>Motel — Always</p>
+                   </div>
+                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                     VIEW SERVICES &rarr;
+                   </a>
+                 </div>
+
+          </div>
+        </div>
+      </section>
+      {/* ===== MAP ===== */}
+      <section id="map" className="px-8 py-24">
+        <div className="mx-auto max-w-6xl">
+
+          <p className="text-xs tracking-[0.3em] text-stone-400">
+            MAP OF SILENT PINES
+          </p>
+          <h2 className="mt-4 font-serif text-4xl leading-tight text-stone-800">
+            Find your way.<br />Or somewhere else.
+          </h2>
+          <p className="mt-4 max-w-sm text-base leading-relaxed text-stone-600">
+            Some areas remain unmapped.
+          </p>
+          <p className="font-serif text-lg italic text-stone-500">
+            This is intentional.
+          </p>
+
+          {/* Карта с точками */}
+          <div className="relative mt-10">
+            <img
+              src="/images/map.jpg"
+              alt="Map of Silent Pines"
+              className="w-full object-cover shadow-sm"
+            />
+
+            {/* Точка 1 — Въезд */}
+            <span
+              id="point-schedule"
+              title="Bus route. Once a day. Last stop unmarked."
+              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              style={{ left: "30%", top: "92%" }}
+            ></span>
+
+            {/* Точка 2 — Телефон */}
+            <span
+              id="point-phone"
+              title="Public phone. Location approximate."
+              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              style={{ left: "25%", top: "40%" }}
+            ></span>
+
+            {/* Точка 3 — Дорога */}
+            <span
+              id="point-road"
+              title="Stay on this road after dark."
+              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              style={{ left: "56%", top: "44%" }}
+            ></span>
+            {/* Точка 4 — Центр / Мотель */}
+            <span
+              id="point-services"
+              title="Pine Motel — Always open. Other services vary."
+              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              style={{ left: "53%", top: "74%" }}
+            ></span>
+          </div>
+        </div>
+      </section>
+      {/* ===== PLAN YOUR STAY ===== */}
+      <section
+        id="stay"
+                        className="relative flex min-h-[75vh] items-center bg-cover bg-top px-8"
+        style={{ backgroundImage: "url('/images/stay.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+        <div className="relative z-10 max-w-xl">
+          <p className="text-xs tracking-[0.3em] text-stone-400">
+            PLAN YOUR STAY
+          </p>
+          <h2 className="font-serif text-5xl leading-tight text-stone-100">
+            You've come this far.<br />You may as well stay.
+          </h2>
+          <p className="mt-6 text-base leading-relaxed text-stone-300">
+            A room has been kept for you.
+          </p>
+<a
+
+    href="#contact"
+    className="mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-8 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20"
+  >
+    REQUEST A ROOM
+    <span aria-hidden="true">&rarr;</span>
+  </a>
+        </div>
+      </section>
+      {/* ===== FOOTER ===== */}
+      <footer id="contact" className="bg-[#17201E] px-8 py-12 text-stone-300">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
+
+          {/* Слева — название */}
+          <div>
+            <p className="text-sm tracking-widest text-stone-100">
+              SILENT PINES TOURISM OFFICE
+            </p>
+            <p className="mt-2 text-xs tracking-wider text-stone-400">
+              VISITOR INFORMATION
+            </p>
+          </div>
+
+          {/* Центр — ссылки */}
+          <div className="flex items-start gap-4 text-xs tracking-widest md:justify-center">
+            <a href="#contact" className="text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+              CONTACT
+            </a>
+            <span className="text-stone-600">·</span>
+<a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline"
+            >
+                            INSTAGRAM
+            </a>
+          </div>
+
+          {/* Справа — контакты */}
+          <div className="space-y-1 text-sm text-stone-400 md:text-right">
+                        <p className="mb-2 text-xs tracking-widest text-stone-500">CONTACT INFORMATION</p>
+            <p>No phone.</p>
+            <p>No address.</p>
+            <p>Ask in town.</p>
+          </div>
+
+        </div>
+
+        {/* Нижняя служебная строка */}
+        <div className="mx-auto mt-10 max-w-6xl border-t border-stone-700 pt-8 text-xs tracking-wider text-stone-400">
+          <p>© Silent Pines Tourism Office · Last updated: Unknown</p>
+        </div>
+      </footer>
+    </main>
+  );
+}
