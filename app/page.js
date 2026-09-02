@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default function Home() {
   const instagramUrl = "#";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activePoint, setActivePoint] = useState(null);
+
+  useEffect(() => {
+    if (!activePoint) return;
+    const timer = setTimeout(() => setActivePoint(null), 3000);
+    return () => clearTimeout(timer);
+  }, [activePoint]);
   return (
     <main className="min-h-screen bg-stone-100 text-stone-800">
     {/* Мобильное меню */}
@@ -114,7 +121,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
 
         </div>
       </section>       {/* ===== PLACES ===== */}
-      <section id="places" className="px-8 py-24">
+     <section id="places" className="px-8 py-12 md:py-24">
         <div className="mx-auto max-w-6xl">
 
           <p className="text-center text-xs tracking-[0.3em] text-stone-400">
@@ -181,8 +188,8 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
         </div>
       </section>
       {/* ===== QUOTE ===== */}
-      <section className="px-8 py-24">
-        <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-[1fr_1.3fr]">
+    <section className="px-8 py-12 md:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[1fr_1.3fr]">
 
           {/* Левая колонка — картинка */}
           <div>
@@ -227,7 +234,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
         </div>
       </section>
       {/* ===== VISITOR GUIDE ===== */}
-            <section id="guide" className="bg-[#17201E] px-8 py-24 text-stone-200">
+           <section id="guide" className="bg-[#17201E] px-8 py-16 md:py-24 text-stone-200">
         <div className="mx-auto max-w-6xl">
 
           <p className="text-center text-xs tracking-[0.3em] text-stone-500">
@@ -252,7 +259,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      The last stop is not marked.
                    </p>
-                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                  <a href="#point-schedule" onClick={() => setActivePoint("point-schedule")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      VIEW SCHEDULE &rarr;
                    </a>
                  </div>
@@ -273,7 +280,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      Reception is unreliable.
                    </p>
-                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#point-phone" onClick={() => setActivePoint("point-phone")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      FIND THE PHONE &rarr;
                    </a>
                  </div>
@@ -294,7 +301,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      Avoid the forest after dark.
                    </p>
-                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#point-road" onClick={() => setActivePoint("point-road")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      READ GUIDELINES &rarr;
                    </a>
                  </div>
@@ -314,7 +321,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                      <p>General Store — Open</p>
                      <p>Motel — Always</p>
                    </div>
-                   <a href="#map" className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#point-services" onClick={() => setActivePoint("point-services")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      VIEW SERVICES &rarr;
                    </a>
                  </div>
@@ -323,7 +330,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
         </div>
       </section>
       {/* ===== MAP ===== */}
-      <section id="map" className="px-8 py-24">
+     <section id="map" className="px-8 py-16 md:py-24">
         <div className="mx-auto max-w-6xl">
 
           <p className="text-xs tracking-[0.3em] text-stone-400">
@@ -351,7 +358,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             <span
               id="point-schedule"
               title="Bus route. Once a day. Last stop unmarked."
-              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-schedule" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
               style={{ left: "30%", top: "92%" }}
             ></span>
 
@@ -359,7 +366,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             <span
               id="point-phone"
               title="Public phone. Location approximate."
-              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-phone" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
               style={{ left: "25%", top: "40%" }}
             ></span>
 
@@ -367,14 +374,14 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             <span
               id="point-road"
               title="Stay on this road after dark."
-              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-road" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
               style={{ left: "56%", top: "44%" }}
             ></span>
             {/* Точка 4 — Центр / Мотель */}
             <span
               id="point-services"
               title="Pine Motel — Always open. Other services vary."
-              className="absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-stone-100 bg-stone-800/60 hover:bg-stone-800"
+              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-services" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
               style={{ left: "53%", top: "74%" }}
             ></span>
           </div>
