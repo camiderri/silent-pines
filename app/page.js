@@ -5,12 +5,63 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
   const instagramUrl = "#";
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePoint, setActivePoint] = useState(null);
+  const [tooltipPoint, setTooltipPoint] = useState(null);
+  const [supportsHover, setSupportsHover] = useState(false);
+
+  useEffect(() => {
+    setSupportsHover(window.matchMedia("(hover: hover)").matches);
+  }, []);
+
+  const mapPoints = [
+    {
+      id: "point-schedule",
+      left: "30%",
+      top: "92%",
+      image: "/images/door.jpg",
+      title: "Bus Stop",
+      caption: "Once a day. Last stop unmarked.",
+    },
+    {
+      id: "point-phone",
+      left: "25%",
+      top: "40%",
+      image: "/images/phone.jpg",
+      title: "Payphone",
+      caption: "Location approximate.",
+    },
+    {
+      id: "point-road",
+      left: "56%",
+      top: "44%",
+      image: "/images/road.jpg",
+      title: "The Road",
+      caption: "Stay on it after dark.",
+    },
+    {
+      id: "point-services",
+      left: "63%",
+      top: "68%",
+      image: "/images/gas.jpg",
+      title: "Services",
+      caption: "Availability varies.",
+    },
+  ];
 
   useEffect(() => {
     if (!activePoint) return;
     const timer = setTimeout(() => setActivePoint(null), 3000);
     return () => clearTimeout(timer);
   }, [activePoint]);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (!e.target.closest("[data-tooltip-card]")) {
+        setTooltipPoint(null);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
   return (
     <main className="min-h-screen bg-stone-100 text-stone-800">
     {/* Мобильное меню */}
@@ -259,7 +310,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      The last stop is not marked.
                    </p>
-                  <a href="#point-schedule" onClick={() => setActivePoint("point-schedule")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                  <a href="#map" onClick={() => setActivePoint("point-schedule")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      VIEW SCHEDULE &rarr;
                    </a>
                  </div>
@@ -280,7 +331,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      Reception is unreliable.
                    </p>
-                   <a href="#point-phone" onClick={() => setActivePoint("point-phone")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#map" onClick={() => setActivePoint("point-phone")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      FIND THE PHONE &rarr;
                    </a>
                  </div>
@@ -301,7 +352,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      Avoid the forest after dark.
                    </p>
-                   <a href="#point-road" onClick={() => setActivePoint("point-road")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#map" onClick={() => setActivePoint("point-road")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      READ GUIDELINES &rarr;
                    </a>
                  </div>
@@ -321,7 +372,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                      <p>General Store — Open</p>
                      <p>Motel — Always</p>
                    </div>
-                   <a href="#point-services" onClick={() => setActivePoint("point-services")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#map" onClick={() => setActivePoint("point-services")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      VIEW SERVICES &rarr;
                    </a>
                  </div>
@@ -354,39 +405,62 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
               className="w-full object-cover shadow-sm"
             />
 
-            {/* Точка 1 — Въезд */}
-            <span
-              id="point-schedule"
-              title="Bus route. Once a day. Last stop unmarked."
-              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-schedule" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
-              style={{ left: "30%", top: "92%" }}
-            ></span>
+            {mapPoints.map((point) => {
+              const isRight = parseFloat(point.left) > 50;
+              const isBottom = parseFloat(point.top) > 50;
+              return (
+                <div
+                  key={point.id}
+                  className="absolute"
+                  style={{ left: point.left, top: point.top }}
+                  onMouseEnter={supportsHover ? () => setTooltipPoint(point.id) : undefined}
+                  onMouseLeave={supportsHover ? () => setTooltipPoint(null) : undefined}
+                >
+                  <span
+                    id={point.id}
+                    className={`map-point absolute left-0 top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 cursor-pointer ${activePoint === point.id ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setTooltipPoint(tooltipPoint === point.id ? null : point.id);
+                    }}
+                  ></span>
 
-            {/* Точка 2 — Телефон */}
-            <span
-              id="point-phone"
-              title="Public phone. Location approximate."
-              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-phone" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
-              style={{ left: "25%", top: "40%" }}
-            ></span>
+                  {tooltipPoint === point.id && supportsHover && (
+                    <div
+                      data-tooltip-card
+                      className={`absolute z-10 w-40 rounded border border-stone-700 bg-[#17201E]/95 p-2 text-stone-200 shadow-lg backdrop-blur-sm ${isRight ? "right-0" : "left-0"} ${isBottom ? "bottom-3" : "top-3"}`}
+                    >
+                      <img
+                        src={point.image}
+                        alt=""
+                        className="h-16 w-full rounded-sm object-cover"
+                      />
+                      <p className="mt-2 font-serif text-sm leading-snug text-stone-100">
+                        {point.title}
+                      </p>
+                      {point.caption && (
+                        <p className="mt-0.5 text-[11px] italic leading-snug text-stone-400">
+                          {point.caption}
+                        </p>
+                      )}
+                    </div>
+                  )}
 
-            {/* Точка 3 — Дорога */}
-            <span
-              id="point-road"
-              title="Stay on this road after dark."
-              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-road" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
-              style={{ left: "56%", top: "44%" }}
-            ></span>
-            {/* Точка 4 — Центр / Мотель */}
-            <span
-              id="point-services"
-              title="Pine Motel — Always open. Other services vary."
-              className={`map-point absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${activePoint === "point-services" ? "scale-[1.6] border-stone-100 bg-red-700 shadow-[0_0_0_6px_rgba(185,28,28,0.25)]" : "border-stone-100 bg-stone-800/60 hover:bg-stone-800"}`}
-              style={{ left: "53%", top: "74%" }}
-            ></span>
-          </div>
-        </div>
-      </section>
+                  {tooltipPoint === point.id && !supportsHover && (
+                    <div
+                      data-tooltip-card
+                      className={`absolute z-10 w-32 rounded border border-stone-300 bg-white/95 px-2 py-1 text-[11px] leading-snug text-stone-700 shadow-lg backdrop-blur-sm ${isRight ? "right-0" : "left-0"} ${isBottom ? "bottom-3" : "top-3"}`}
+                    >
+                      {point.caption || point.title}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+                     </div>
+                     <div className="mt-6 text-right"><a href="/images/map.jpg" target="_blank" rel="noopener noreferrer" className="inline-block text-xs tracking-widest text-stone-500 underline-offset-4 hover:text-stone-800 hover:underline">VIEW FULL MAP &rarr;</a></div>
+                   </div>
+                 </section>
       {/* ===== PLAN YOUR STAY ===== */}
       <section
         id="stay"
