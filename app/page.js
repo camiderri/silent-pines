@@ -9,6 +9,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
   const [supportsHover, setSupportsHover] = useState(false);
   const [visitorId, setVisitorId] = useState(null);
   const [showRegistration, setShowRegistration] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     setSupportsHover(window.matchMedia("(hover: hover)").matches);
@@ -19,6 +20,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
     if (storedVisitorId) {
       setVisitorId(storedVisitorId);
     }
+    setHydrated(true);
   }, []);
 
   const generateVisitorId = () => {
@@ -150,12 +152,16 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           </p>
           <button
             onClick={() => {
-              generateVisitorId();
-              setShowRegistration(true);
+              if (visitorId) {
+                document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+              } else {
+                generateVisitorId();
+                setShowRegistration(true);
+              }
             }}
-            className="mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20"
+            className={`mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition-opacity duration-700 hover:bg-white/20 ${hydrated ? "opacity-100" : "opacity-0"}`}
           >
-            PLAN YOUR VISIT
+            {visitorId ? `CONTINUE AS VISITOR ${visitorId}` : "PLAN YOUR VISIT"}
             <span aria-hidden="true">&rarr;</span>
           </button>
         </div>
