@@ -651,6 +651,9 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
         {/* Нижняя служебная строка */}
         <div className="mx-auto mt-10 max-w-6xl border-t border-stone-700 pt-8 text-xs tracking-wider text-stone-400">
           <p>© Silent Pines Tourism Office · Last updated: Unknown</p>
+          {visitorId && (
+            <p className="mt-1">Visitor {visitorId} — still here.</p>
+          )}
         </div>
       </footer>
     </main>
