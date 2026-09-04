@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default function Home() {
-  const instagramUrl = "#";
+  const instagramUrl = "https://www.instagram.com/silentpines.town/";
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePoint, setActivePoint] = useState(null);
   const [tooltipPoint, setTooltipPoint] = useState(null);
@@ -10,6 +10,8 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
   const [visitorId, setVisitorId] = useState(null);
   const [showRegistration, setShowRegistration] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [roomRequest, setRoomRequest] = useState("idle");
+  const [contactRevealed, setContactRevealed] = useState(false);
 
   useEffect(() => {
     setSupportsHover(window.matchMedia("(hover: hover)").matches);
@@ -598,14 +600,35 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           <p className="mt-6 text-base leading-relaxed text-stone-300">
             A room has been kept for you.
           </p>
-<a
+          <button
+            type="button"
+            onClick={() => {
+              if (roomRequest !== "idle") return;
+              setRoomRequest("requesting");
+              setTimeout(() => setRoomRequest("received"), 1000);
+            }}
+            className={`mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-8 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20 ${roomRequest === "received" ? "opacity-70" : ""}`}
+          >
+            {roomRequest === "idle" && "REQUEST A ROOM"}
+            {roomRequest === "requesting" && "REQUESTING..."}
+            {roomRequest === "received" && "REQUEST RECEIVED ✓"}
+            <span aria-hidden="true">&rarr;</span>
+          </button>
 
-    href="#contact"
-    className="mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-8 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20"
-  >
-    REQUEST A ROOM
-    <span aria-hidden="true">&rarr;</span>
-  </a>
+          <div
+            className={`mt-4 max-w-sm border border-stone-300 bg-[#f5f1e8] px-5 py-4 text-stone-800 transition-opacity duration-700 sm:px-6 ${roomRequest === "received" ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          >
+            <p className="font-serif text-sm text-stone-800">
+              Request Received
+            </p>
+            <p className="mt-2 font-mono text-xs uppercase tracking-wide text-stone-600">
+              Room assignment: Pending
+            </p>
+            <p className="mt-3 text-xs italic text-stone-500">
+              Please keep your visitor number.<br />
+              You will know when the room is ready.
+            </p>
+          </div>
         </div>
       </section>
       {/* ===== FOOTER ===== */}
@@ -623,11 +646,19 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           </div>
 
           {/* Центр — ссылки */}
-          <div className="flex items-start gap-4 text-xs tracking-widest md:justify-center">
-            <a href="#contact" className="text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
-              CONTACT
-            </a>
-            <span className="text-stone-600">·</span>
+          <div className="flex flex-col items-start gap-2 md:items-center">
+            <div className="flex items-start gap-4 text-xs tracking-widest">
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setContactRevealed(true);
+                }}
+                className="text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline"
+              >
+                CONTACT
+              </a>
+              <span className="text-stone-600">·</span>
 <a
               href={instagramUrl}
               target="_blank"
@@ -636,6 +667,12 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             >
                             INSTAGRAM
             </a>
+            </div>
+            <p
+              className={`text-xs italic text-stone-500 transition-opacity duration-700 ${contactRevealed ? "opacity-100" : "opacity-0"}`}
+            >
+              There is no one to contact.
+            </p>
           </div>
 
           {/* Справа — контакты */}
