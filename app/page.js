@@ -310,7 +310,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      The last stop is not marked.
                    </p>
-                  <a href="#map" onClick={() => setActivePoint("point-schedule")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                  <a href="#map" onClick={(e) => { e.preventDefault(); setActivePoint("point-schedule"); document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" }); }} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      VIEW SCHEDULE &rarr;
                    </a>
                  </div>
@@ -331,7 +331,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      Reception is unreliable.
                    </p>
-                   <a href="#map" onClick={() => setActivePoint("point-phone")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#map" onClick={(e) => { e.preventDefault(); setActivePoint("point-phone"); document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" }); }} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      FIND THE PHONE &rarr;
                    </a>
                  </div>
@@ -352,7 +352,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                    <p className="text-sm italic text-stone-400">
                      Avoid the forest after dark.
                    </p>
-                   <a href="#map" onClick={() => setActivePoint("point-road")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#map" onClick={(e) => { e.preventDefault(); setActivePoint("point-road"); document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" }); }} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      READ GUIDELINES &rarr;
                    </a>
                  </div>
@@ -372,7 +372,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                      <p>General Store — Open</p>
                      <p>Motel — Always</p>
                    </div>
-                   <a href="#map" onClick={() => setActivePoint("point-services")} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
+                   <a href="#map" onClick={(e) => { e.preventDefault(); setActivePoint("point-services"); document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" }); }} className="mt-auto pt-3 inline-block text-xs tracking-widest text-stone-300 underline-offset-4 hover:text-stone-100 hover:underline">
                      VIEW SERVICES &rarr;
                    </a>
                  </div>
