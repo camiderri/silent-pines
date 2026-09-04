@@ -458,6 +458,39 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
               );
             })}
                      </div>
+
+                     {/* Мобильный реестр Tourism Office */}
+                     <div className="mt-8 border border-stone-300 bg-stone-50 md:hidden">
+                       <p className="border-b border-stone-300 px-4 py-3 font-mono text-xs uppercase tracking-widest text-stone-500">
+                         Map Reference
+                       </p>
+                       <div className="divide-y divide-stone-300">
+                         {mapPoints.map((point) => (
+                           <button
+                             key={point.id}
+                             type="button"
+                             onClick={() => {
+                               setActivePoint(point.id);
+                               document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" });
+                             }}
+                             className="flex w-full min-h-[44px] cursor-pointer flex-col items-start px-4 py-3 text-left"
+                           >
+                             <span className="font-serif text-sm text-stone-800">
+                               {point.title}
+                             </span>
+                             {point.caption && (
+                               <span className="mt-0.5 text-xs italic text-stone-500">
+                                 {point.caption}
+                               </span>
+                             )}
+                           </button>
+                         ))}
+                       </div>
+                       <p className="border-t border-stone-300 px-4 py-2 font-mono text-[11px] italic uppercase tracking-wide text-red-800/70">
+                         Locations are approximate.
+                       </p>
+                     </div>
+
                      <div className="mt-6 text-right"><a href="/images/map.jpg" target="_blank" rel="noopener noreferrer" className="inline-block text-xs tracking-widest text-stone-500 underline-offset-4 hover:text-stone-800 hover:underline">VIEW FULL MAP &rarr;</a></div>
                    </div>
                  </section>
