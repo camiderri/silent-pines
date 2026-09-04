@@ -7,10 +7,30 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
   const [activePoint, setActivePoint] = useState(null);
   const [tooltipPoint, setTooltipPoint] = useState(null);
   const [supportsHover, setSupportsHover] = useState(false);
+  const [visitorId, setVisitorId] = useState(null);
+  const [showRegistration, setShowRegistration] = useState(false);
 
   useEffect(() => {
     setSupportsHover(window.matchMedia("(hover: hover)").matches);
   }, []);
+
+  useEffect(() => {
+    const storedVisitorId = localStorage.getItem("silentPinesVisitorId");
+    if (storedVisitorId) {
+      setVisitorId(storedVisitorId);
+    }
+  }, []);
+
+  const generateVisitorId = () => {
+    const storedVisitorId = localStorage.getItem("silentPinesVisitorId");
+    if (storedVisitorId) {
+      setVisitorId(storedVisitorId);
+      return;
+    }
+    const newVisitorId = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
+    localStorage.setItem("silentPinesVisitorId", newVisitorId);
+    setVisitorId(newVisitorId);
+  };
 
   const mapPoints = [
     {
@@ -128,12 +148,73 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           <p className="mt-8 max-w-sm text-base leading-relaxed text-stone-200">
             A quiet town surrounded by forest, fog and stories.
           </p>
-          <button className="mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20">
+          <button
+            onClick={() => {
+              generateVisitorId();
+              setShowRegistration(true);
+            }}
+            className="mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20"
+          >
             PLAN YOUR VISIT
             <span aria-hidden="true">&rarr;</span>
           </button>
         </div>
       </section>
+
+      {/* ===== VISITOR REGISTRATION ===== */}
+      {showRegistration && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+          onClick={() => setShowRegistration(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-sm border border-stone-300 bg-[#f5f1e8] px-6 py-8 text-stone-800 shadow-sm sm:px-8"
+          >
+            <p className="text-center font-mono text-[11px] uppercase tracking-widest text-stone-500">
+              Silent Pines Tourism Office
+            </p>
+            <h3 className="mt-1 text-center font-serif text-xl text-stone-800">
+              Visitor Registration
+            </h3>
+
+            <p className="mt-6 text-center font-mono text-sm uppercase tracking-widest text-stone-700">
+              Record No. {visitorId}
+            </p>
+
+            <div className="mt-6 space-y-2 border-y border-stone-300 py-4 font-mono text-xs uppercase tracking-wide text-stone-600">
+              <div className="flex justify-between gap-4">
+                <span>Status</span>
+                <span className="text-red-800/70">Arrived</span>
+              </div>
+              <div className="flex justify-between gap-4">
+                <span>Room</span>
+                <span>Not Assigned</span>
+              </div>
+              <div className="flex justify-between gap-4">
+                <span>Departure</span>
+                <span>Not Recorded</span>
+              </div>
+            </div>
+
+            <p className="mt-6 text-center font-serif text-sm italic leading-relaxed text-stone-600">
+              Please keep this number.<br />
+              The town will remember it.
+            </p>
+
+            <button
+              onClick={() => {
+                setShowRegistration(false);
+                document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+              }}
+              className="mt-8 block w-full text-center text-xs tracking-widest text-stone-500 underline-offset-4 hover:text-stone-800 hover:underline"
+            >
+              ENTER SILENT PINES &rarr;
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* ===== ABOUT ===== */}
          <section id="about" className="px-8 pt-24 pb-16">
                <div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_1.4fr]">
