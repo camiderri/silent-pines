@@ -145,27 +145,29 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
 
-        <div className="relative z-10 max-w-xl">
-          <h1 className="font-serif text-6xl tracking-widest text-stone-100">
-            SILENT PINES
-          </h1>
-          <p className="mt-8 max-w-sm text-base leading-relaxed text-stone-200">
-            A quiet town surrounded by forest, fog and stories.
-          </p>
-          <button
-            onClick={() => {
-              if (visitorId) {
-                document.getElementById("about").scrollIntoView({ behavior: "smooth" });
-              } else {
-                generateVisitorId();
-                setShowRegistration(true);
-              }
-            }}
-            className={`mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition-opacity duration-700 hover:bg-white/20 ${hydrated ? "opacity-100" : "opacity-0"}`}
-          >
-            {visitorId ? `CONTINUE AS VISITOR ${visitorId}` : "PLAN YOUR VISIT"}
-            <span aria-hidden="true">&rarr;</span>
-          </button>
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <div className="max-w-xl">
+            <h1 className="font-serif text-6xl tracking-widest text-stone-100">
+              SILENT PINES
+            </h1>
+            <p className="mt-8 max-w-sm text-base leading-relaxed text-stone-200">
+              A quiet town surrounded by forest, fog and stories.
+            </p>
+            <button
+              onClick={() => {
+                if (visitorId) {
+                  document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+                } else {
+                  generateVisitorId();
+                  setShowRegistration(true);
+                }
+              }}
+              className={`mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-10 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition-opacity duration-700 hover:bg-white/20 ${hydrated ? "opacity-100" : "opacity-0"}`}
+            >
+              {visitorId ? `CONTINUE AS VISITOR ${visitorId}` : "PLAN YOUR VISIT"}
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -586,49 +588,51 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       {/* ===== PLAN YOUR STAY ===== */}
       <section
         id="stay"
-                        className="relative flex min-h-[75vh] items-center bg-cover bg-top px-8"
+                        className="relative flex min-h-[75vh] items-end md:items-center bg-cover bg-top px-8"
         style={{ backgroundImage: "url('/images/stay.jpg')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
-        <div className="relative z-10 max-w-xl">
-          <p className="text-xs tracking-[0.3em] text-stone-400">
-            PLAN YOUR STAY
-          </p>
-          <h2 className="font-serif text-3xl leading-tight text-stone-100 md:text-5xl">
-            <span className="hidden md:inline">You've come this far.<br /></span>
-            You may as well stay.
-          </h2>
-          <p className="mt-6 text-base leading-relaxed text-stone-300">
-            A room has been kept for you.
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              if (roomRequest !== "idle") return;
-              setRoomRequest("requesting");
-              setTimeout(() => setRoomRequest("received"), 1000);
-            }}
-            className={`mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-8 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20 ${roomRequest === "received" ? "opacity-70" : ""}`}
-          >
-            {roomRequest === "idle" && "REQUEST A ROOM"}
-            {roomRequest === "requesting" && "REQUESTING..."}
-            {roomRequest === "received" && "REQUEST RECEIVED ✓"}
-            <span aria-hidden="true">&rarr;</span>
-          </button>
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <div className="max-w-xl pb-16 md:pb-0">
+            <p className="text-xs tracking-[0.3em] text-stone-400">
+              PLAN YOUR STAY
+            </p>
+            <h2 className="font-serif text-3xl leading-tight text-stone-100 md:text-5xl">
+              <span className="hidden md:inline">You've come this far.<br /></span>
+              You may as well stay.
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-stone-300">
+              A room has been kept for you.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                if (roomRequest !== "idle") return;
+                setRoomRequest("requesting");
+                setTimeout(() => setRoomRequest("received"), 1000);
+              }}
+              className={`mt-8 inline-flex items-center gap-2 border border-stone-200/70 bg-white/10 px-8 py-3 text-xs tracking-widest text-stone-100 backdrop-blur-sm transition hover:bg-white/20 ${roomRequest === "received" ? "opacity-70" : ""}`}
+            >
+              {roomRequest === "idle" && "REQUEST A ROOM"}
+              {roomRequest === "requesting" && "REQUESTING..."}
+              {roomRequest === "received" && "REQUEST RECEIVED ✓"}
+              {roomRequest !== "received" && <span aria-hidden="true">&rarr;</span>}
+            </button>
 
-          <div
-            className={`mt-4 max-w-sm border border-stone-300 bg-[#f5f1e8] px-5 py-4 text-stone-800 transition-opacity duration-700 sm:px-6 ${roomRequest === "received" ? "opacity-100" : "pointer-events-none opacity-0"}`}
-          >
-            <p className="font-serif text-sm text-stone-800">
-              Request Received
-            </p>
-            <p className="mt-2 font-mono text-xs uppercase tracking-wide text-stone-600">
-              Room assignment: Pending
-            </p>
-            <p className="mt-3 text-xs italic text-stone-500">
-              Please keep your visitor number.<br />
-              You will know when the room is ready.
-            </p>
+            <div
+              className={`mt-4 max-w-sm border border-stone-300 bg-[#f5f1e8] px-5 py-4 text-stone-800 transition-opacity duration-700 sm:px-6 ${roomRequest === "received" ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            >
+              <p className="font-serif text-sm text-stone-800">
+                Request Received
+              </p>
+              <p className="mt-2 font-mono text-xs uppercase tracking-wide text-stone-600">
+                Room assignment: Pending
+              </p>
+              <p className="mt-3 text-xs italic text-stone-500">
+                Please keep your visitor number.<br />
+                You will know when the room is ready.
+              </p>
+            </div>
           </div>
         </div>
       </section>
