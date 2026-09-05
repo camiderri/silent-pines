@@ -41,7 +41,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       id: "point-schedule",
       left: "30%",
       top: "92%",
-      image: "/images/door.jpg",
+      image: "/images/door.webp",
       title: "Bus Stop",
       caption: "Once a day. Last stop unmarked.",
     },
@@ -49,7 +49,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       id: "point-phone",
       left: "25%",
       top: "40%",
-      image: "/images/phone.jpg",
+      image: "/images/phone.webp",
       title: "Payphone",
       caption: "Location approximate.",
     },
@@ -57,7 +57,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       id: "point-road",
       left: "56%",
       top: "44%",
-      image: "/images/road.jpg",
+      image: "/images/road.webp",
       title: "The Road",
       caption: "Stay on it after dark.",
     },
@@ -65,7 +65,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       id: "point-services",
       left: "63%",
       top: "68%",
-      image: "/images/gas.jpg",
+      image: "/images/gas.webp",
       title: "Services",
       caption: "Availability varies.",
     },
@@ -141,7 +141,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       {/* ===== HERO ===== */}
       <section
         className="relative flex min-h-[80vh] items-center bg-cover bg-center px-8"
-        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+        style={{ backgroundImage: "url('/images/hero.webp')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
 
@@ -255,7 +255,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           {/* Правая колонка — картинка */}
           <div>
             <img
-              src="/images/town.jpg"
+              src="/images/town.webp"
               alt="A street in Silent Pines"
               className="w-full rounded-sm object-cover shadow-sm"
             />
@@ -275,7 +275,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             {/* Карточка 1 — Pine Motel */}
             <div>
               <img
-                src="/images/motel.jpg"
+                src="/images/motel.webp"
                 alt="Pine Motel"
                                className="aspect-[4/3] w-full object-cover shadow-sm"
               />
@@ -293,7 +293,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             {/* Карточка 2 — Blackwater Lake */}
             <div>
               <img
-                src="/images/lake.jpg"
+                src="/images/lake.webp"
                 alt="Blackwater Lake"
                                className="aspect-[4/3] w-full object-cover shadow-sm"
               />
@@ -311,7 +311,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
             {/* Карточка 3 — The Clearing */}
             <div>
               <img
-                src="/images/clearing.jpg"
+                src="/images/clearing.webp"
                 alt="The Clearing"
                                 className="aspect-[4/3] w-full object-cover shadow-sm"
               />
@@ -336,7 +336,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           {/* Левая колонка — картинка */}
           <div>
             <img
-              src="/images/quiet.jpg"
+              src="/images/quiet.webp"
               alt="A cup by a rainy window"
               className="aspect-[3/4] w-full object-cover shadow-sm"
             />
@@ -388,7 +388,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                  {/* GETTING AROUND */}
                  <div className="flex flex-col">
                    <img
-                     src="/images/door.jpg"
+                     src="/images/door.webp"
                      alt="Getting around"
                      className="aspect-[3/4] w-full object-cover"
                    />
@@ -409,7 +409,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                  {/* STAY CONNECTED */}
                  <div className="flex flex-col">
                    <img
-                     src="/images/phone.jpg"
+                     src="/images/phone.webp"
                      alt="Stay connected"
                      className="aspect-[3/4] w-full object-cover"
                    />
@@ -430,7 +430,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                  {/* SAFETY */}
                  <div className="flex flex-col">
                    <img
-                     src="/images/road.jpg"
+                     src="/images/road.webp"
                      alt="Safety"
                      className="aspect-[3/4] w-full object-cover"
                    />
@@ -451,7 +451,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                  {/* LOCAL SERVICES */}
                  <div className="flex flex-col">
                    <img
-                     src="/images/gas.jpg"
+                     src="/images/gas.webp"
                      alt="Local services"
                      className="aspect-[3/4] w-full object-cover"
                    />
@@ -491,7 +491,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
           {/* Карта с точками */}
           <div className="relative mt-10">
             <img
-              src="/images/map.jpg"
+              src="/images/map.webp"
               alt="Map of Silent Pines"
               className="w-full object-cover shadow-sm"
             />
@@ -582,14 +582,14 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
                        </p>
                      </div>
 
-                     <div className="mt-6 text-right"><a href="/images/map.jpg" target="_blank" rel="noopener noreferrer" className="inline-block text-xs tracking-widest text-stone-500 underline-offset-4 hover:text-stone-800 hover:underline">VIEW FULL MAP &rarr;</a></div>
+                     <div className="mt-6 text-right"><a href="/images/map.webp" target="_blank" rel="noopener noreferrer" className="inline-block text-xs tracking-widest text-stone-500 underline-offset-4 hover:text-stone-800 hover:underline">VIEW FULL MAP &rarr;</a></div>
                    </div>
                  </section>
       {/* ===== PLAN YOUR STAY ===== */}
       <section
         id="stay"
                         className="relative flex min-h-[75vh] md:min-h-screen items-end md:items-center bg-cover bg-top px-8"
-        style={{ backgroundImage: "url('/images/stay.jpg')" }}
+        style={{ backgroundImage: "url('/images/stay.webp')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
         <div className="relative z-10 mx-auto w-full max-w-6xl">
