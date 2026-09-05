@@ -588,7 +588,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       {/* ===== PLAN YOUR STAY ===== */}
       <section
         id="stay"
-                        className="relative flex min-h-[75vh] items-end md:items-center bg-cover bg-top px-8"
+                        className="relative flex min-h-[75vh] md:min-h-screen items-end md:items-center bg-cover bg-top px-8"
         style={{ backgroundImage: "url('/images/stay.jpg')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
