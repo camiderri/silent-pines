@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default function Home() {
+  ReactDOM.preload("/images/hero.webp", { as: "image" });
+
   const instagramUrl = "https://www.instagram.com/silentpines.town/";
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePoint, setActivePoint] = useState(null);
@@ -141,7 +144,7 @@ import { CloudRain, Thermometer, Eye, Users } from "lucide-react";export default
       {/* ===== HERO ===== */}
       <section
         className="relative flex min-h-[80vh] items-center bg-cover bg-center px-8"
-        style={{ backgroundImage: "url('/images/hero.webp')" }}
+        style={{ backgroundImage: "url('/images/hero.webp')", backgroundColor: "#1a1a1a" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
 
